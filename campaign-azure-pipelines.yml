@@ -5,6 +5,10 @@
 trigger:
 - master
 
+paths:
+  include:
+  - Bikesharing.Campaign/*
+
 resources:
 - repo: self
 

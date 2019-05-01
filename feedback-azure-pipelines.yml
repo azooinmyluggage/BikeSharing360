@@ -5,6 +5,10 @@
 trigger:
 - master
 
+paths:
+  include:
+  - Feedback.Api/.Api/*
+
 resources:
 - repo: self
 

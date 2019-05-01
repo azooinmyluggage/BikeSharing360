@@ -5,6 +5,10 @@
 trigger:
 - master
 
+paths:
+  include:
+  - Profile.Api/*
+
 resources:
 - repo: self
 
