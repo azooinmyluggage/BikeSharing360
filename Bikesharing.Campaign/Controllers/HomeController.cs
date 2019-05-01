@@ -51,6 +51,7 @@ namespace Bikesharing.Campaign.Controllers
 
             // Confirm customer is signed up
             ViewBag.Confirmation = (string)profile.FirstName;
+            ViewBag.Message = (string)emailData;
             return View("Index");
         }
 
