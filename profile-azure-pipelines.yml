@@ -33,6 +33,9 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - bash: 'docker-compose -f docker-compose.ci.build.yml up'
+      displayName: 'Bash Script'
+      
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
