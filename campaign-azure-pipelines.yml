@@ -64,7 +64,7 @@ stages:
         artifactName: 'manifests'
         targetPath: 'Bikesharing.Campaign/manifests'
 
-- stage: Deploy to Default
+- stage: DeployToDefault
   displayName: Deploy to Default
   dependsOn: Build
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
@@ -105,7 +105,7 @@ stages:
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: Deploy to Demo1
+- stage: DeployToDemo1
   displayName: Deploy to Demo1
   dependsOn: Build
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
