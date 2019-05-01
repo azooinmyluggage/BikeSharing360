@@ -65,7 +65,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'azooinmyluggageBikeSharing360MultiContainer.default'
+    environment: 'BikeSharing-Production.default-builddemo'
     strategy:
       runOnce:
         deploy:
