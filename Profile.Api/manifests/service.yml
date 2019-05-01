@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: bikesharing.profile.api
+    name: bikesharingprofileapi
 spec:
     type: LoadBalancer
     ports:
