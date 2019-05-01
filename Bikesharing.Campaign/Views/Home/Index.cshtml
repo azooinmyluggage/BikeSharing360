@@ -26,11 +26,14 @@
             </ul>
         </article>
     </section>
-    @if (!string.IsNullOrEmpty(ViewBag.Confirmation))
+    @if (!string.IsNullOrEmpty(ViewBag.Confirmation) && !string.IsNullOrEmpty(ViewBag.Message))
     {
         <section class="mb-form mb-popular">
             <div class="mb-popular-text">
-                Thank you @ViewBag.Confirmation @ViewBag.Message  - We will notify you when BikeSharing is available in your city. 
+                Thank you @ViewBag.Confirmation - We will notify you when BikeSharing is available in your city....... 
+            </div>
+            <div class="mb-popular-text">
+                Thank you @ViewBag.Message - We will notify you when BikeSharing is available in your city. 
             </div>
         </section>
     }
