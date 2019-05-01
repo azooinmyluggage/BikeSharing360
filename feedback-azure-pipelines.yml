@@ -12,9 +12,9 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
-  imageRepository: 'azooinmyluggagebikesharingmulticontainer'
+  imageRepository: 'azooinmyluggagebikesharingfeedback'
   containerRegistry: 'builddemo.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '**/Feedback.Api/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Kubernetes Namespace
@@ -46,7 +46,7 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'manifests'
-        targetPath: 'manifests'
+        targetPath: 'Feedback.Api/manifests'
 
 - stage: Deploy
   displayName: Deploy stage

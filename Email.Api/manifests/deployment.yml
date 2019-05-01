@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: azooinmyluggagebikesharingemail
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: azooinmyluggagebikesharingemail
+    spec:
+      containers:
+        - name: azooinmyluggagebikesharingemail 
+          image: builddemo.azurecr.io/azooinmyluggagebikesharingemail 
+          ports:
+          - containerPort: 80
