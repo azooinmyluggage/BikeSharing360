@@ -40,7 +40,7 @@ namespace Profile.Api.Controllers
             return new Core.Models.Profile
             {
                 Id = Guid.NewGuid(),
-                FirstName = "Scott",
+                FirstName = "Atul",
                 LastName = "Hanselman",
                 Email = email,
                 City = city
