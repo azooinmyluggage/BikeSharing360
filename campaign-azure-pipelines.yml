@@ -105,10 +105,10 @@ stages:
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: DeployToDemo1
-  displayName: Deploy to Demo1
+- stage: DeployForPR
+  displayName: Deploy to review app
   dependsOn: Build
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull/'))
   jobs:
   - deployment: Deploy
     displayName: Deploy job
