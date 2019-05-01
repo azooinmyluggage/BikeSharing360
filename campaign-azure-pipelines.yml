@@ -115,7 +115,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'BikeSharing-Development.PR'
+    environment: 'BikeSharing-PR.PR'
     strategy:
       runOnce:
         deploy:
