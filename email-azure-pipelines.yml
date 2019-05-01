@@ -3,11 +3,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-
-paths:
-  include:
-  - Email.Api/*
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - Email.Api/*
 
 resources:
 - repo: self

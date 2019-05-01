@@ -3,11 +3,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-
-paths:
-  include:
-  - Feedback.Api/.Api/*
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - Feedback.Api/.Api/*
 
 resources:
 - repo: self

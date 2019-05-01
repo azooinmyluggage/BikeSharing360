@@ -3,11 +3,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-
-paths:
-  include:
-  - Bikesharing.Campaign/*
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - Bikesharing.Campaign/*
 
 resources:
 - repo: self
