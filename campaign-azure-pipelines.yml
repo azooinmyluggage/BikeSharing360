@@ -24,7 +24,7 @@ variables:
   
   # Kubernetes Namespace
   k8sNamespace: 'default'
-  k8sNamespaceforpr: 'demo1'
+  k8sNamespaceforpr: 'demopr'
   imagePullSecret: 'builddemodfb0-auth'
 
   # Agent VM image name
@@ -115,7 +115,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'BikeSharing-Development.demo1-builddemo'
+    environment: 'BikeSharing-Development.PR'
     strategy:
       runOnce:
         deploy:
@@ -126,8 +126,16 @@ stages:
               downloadPath: '$(System.ArtifactsDirectory)/manifests'
 
           - task: KubernetesManifest@0
+            displayName: 'Create PR namespace'
+            inputs:
+              kubernetesServiceConnection: 'builddemo'
+              action: deploy
+              manifests: '$(System.ArtifactsDirectory)/manifests/pr-namespace.yml'
+
+          - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
+              kubernetesServiceConnection: 'builddemo'
               action: createSecret
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespaceforpr)
@@ -136,6 +144,7 @@ stages:
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
+              kubernetesServiceConnection: 'builddemo'
               action: deploy
               namespace: $(k8sNamespaceforpr)
               manifests: |
