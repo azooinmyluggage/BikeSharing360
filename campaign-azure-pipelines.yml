@@ -22,7 +22,7 @@ variables:
   imagePullSecret: 'builddemodfb0-auth'
 
   # Agent VM image name
-  # vmImageName: 'ubuntu-latest'
+  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
@@ -31,14 +31,14 @@ stages:
   - job: Build
     displayName: Build job
     pool:
-      name: work-machine
-      # vmImage: $(vmImageName)
+      # name: work-machine
+      vmImage: $(vmImageName)
     steps:
 
-    - task: DockerInstaller@0
-      displayName: 'Install Docker 17.09.0-ce'
-      inputs:
-        dockerVersion: 17.09.0-ce
+    # - task: DockerInstaller@0
+    #   displayName: 'Install Docker 17.09.0-ce'
+    #   inputs:
+    #     dockerVersion: 17.09.0-ce
 
     - bash: 'docker-compose -f docker-compose.ci.build.yml up'
       displayName: 'Bash Script'
