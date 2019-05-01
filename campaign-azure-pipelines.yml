@@ -24,6 +24,7 @@ variables:
   
   # Kubernetes Namespace
   k8sNamespace: 'default'
+  k8sNamespaceforpr: 'demo1'
   imagePullSecret: 'builddemodfb0-auth'
 
   # Agent VM image name
@@ -63,16 +64,17 @@ stages:
         artifactName: 'manifests'
         targetPath: 'Bikesharing.Campaign/manifests'
 
-- stage: Deploy
-  displayName: Deploy stage
+- stage: Deploy to Default
+  displayName: Deploy to Default
   dependsOn: Build
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
   jobs:
   - deployment: Deploy
     displayName: Deploy job
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'azooinmyluggageBikeSharing360MultiContainer.default'
+    environment: 'BikeSharing-Production.default-builddemo'
     strategy:
       runOnce:
         deploy:
@@ -95,6 +97,47 @@ stages:
             inputs:
               action: deploy
               namespace: $(k8sNamespace)
+              manifests: |
+                $(System.ArtifactsDirectory)/manifests/deployment.yml
+                $(System.ArtifactsDirectory)/manifests/service.yml
+              imagePullSecrets: |
+                $(imagePullSecret)
+              containers: |
+                $(containerRegistry)/$(imageRepository):$(tag)
+
+- stage: Deploy to Demo1
+  displayName: Deploy to Demo1
+  dependsOn: Build
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy job
+    pool:
+      name: work-machine
+      # vmImage: $(vmImageName)
+    environment: 'BikeSharing-Development.demo1-builddemo'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@1
+            inputs:
+              artifactName: 'manifests'
+              downloadPath: '$(System.ArtifactsDirectory)/manifests'
+
+          - task: KubernetesManifest@0
+            displayName: Create imagePullSecret
+            inputs:
+              action: createSecret
+              secretName: $(imagePullSecret)
+              namespace: $(k8sNamespaceforpr)
+              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+              
+          - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
+            inputs:
+              action: deploy
+              namespace: $(k8sNamespaceforpr)
               manifests: |
                 $(System.ArtifactsDirectory)/manifests/deployment.yml
                 $(System.ArtifactsDirectory)/manifests/service.yml
