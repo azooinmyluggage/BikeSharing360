@@ -1,16 +1,16 @@
 apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
-  name: azooinmyluggagebikesharingfeedback
+  name: bikesharingfeedbackapi
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: azooinmyluggagebikesharingfeedback
+        app: bikesharingfeedbackapi
     spec:
       containers:
-        - name: azooinmyluggagebikesharingfeedback 
-          image: builddemo.azurecr.io/azooinmyluggagebikesharingfeedback 
+        - name: bikesharingfeedbackapi 
+          image: builddemo.azurecr.io/bikesharingfeedbackapi 
           ports:
           - containerPort: 80

@@ -17,7 +17,7 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
-  imageRepository: 'azooinmyluggagebikesharingemail'
+  imageRepository: 'bikesharingemailapi'
   containerRegistry: 'builddemo.azurecr.io'
   dockerfilePath: '**/Email.Api/Dockerfile'
   tag: '$(Build.BuildId)'

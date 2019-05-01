@@ -1,16 +1,16 @@
 apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
-  name: azooinmyluggagebikesharingcampaign
+  name: bikesharingcampaign
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: azooinmyluggagebikesharingcampaign
+        app: bikesharingcampaign
     spec:
       containers:
-        - name: azooinmyluggagebikesharingcampaign 
-          image: builddemo.azurecr.io/azooinmyluggagebikesharingcampaign 
+        - name: bikesharingcampaign 
+          image: builddemo.azurecr.io/bikesharingcampaign 
           ports:
           - containerPort: 80
