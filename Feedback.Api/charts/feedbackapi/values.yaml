@@ -13,14 +13,14 @@ imagePullSecrets:
   # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
   #
   # This uses credentials from secret "myRegistryKeySecretName".
-  - name: builddemodfb0-auth
+  - name: builddemo.azurecr.io/builddemodfb0-auth
 service:
   type: ClusterIP
   port: 80
 
 probes:
   enabled: false
-buildID: "1"
+buildID: 1
 ingress:
   enabled: true
   annotations:

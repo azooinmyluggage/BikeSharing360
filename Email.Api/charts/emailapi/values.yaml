@@ -4,7 +4,7 @@
 fullnameOverride: bikesharingemailapi
 replicaCount: 1
 image:
-  repository: bikesharingemailapi
+  repository: builddemo.azurecr.io/bikesharingemailapi
   tag: 2458
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -20,7 +20,7 @@ service:
 
 probes:
   enabled: false
-buildID: "1"
+buildID: 1
 ingress:
   enabled: true
   annotations:
