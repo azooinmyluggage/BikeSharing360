@@ -64,11 +64,6 @@ stages:
         artifactName: 'manifests'
         targetPath: 'Bikesharing.Campaign/manifests'
       
-    - task: PublishPipelineArtifact@0
-      inputs:
-        artifactName: 'charts'
-        targetPath: 'charts/bikesharingcampaign'
-
 - stage: DeployToDefault
   displayName: Deploy to Default
   dependsOn: Build
@@ -89,11 +84,6 @@ stages:
               artifactName: 'manifests'
               downloadPath: '$(System.ArtifactsDirectory)/manifests'
 
-          - task: DownloadPipelineArtifact@1
-            inputs:
-              artifactName: 'charts'
-              downloadPath: '$(System.ArtifactsDirectory)/charts'
-
           - task: KubernetesManifest@1
             displayName: Create imagePullSecret
             inputs:
@@ -101,21 +91,6 @@ stages:
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespace)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          # - task: KubernetesManifest@1
-          #   displayName: bake
-          #   name: bake
-          #   inputs:
-          #     action: bake
-          #     helmChart: '$(System.ArtifactsDirectory)/charts'
-
-          # - task: KubernetesManifest@1
-          #   displayName: deploy
-          #   inputs:
-          #     action: deploy
-          #     namespace: $(k8sNamespace)
-          #     manifests: $(bake.manifestsBundle)
-          #     imagePullSecrets: $(imagePullSecret)
 
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
