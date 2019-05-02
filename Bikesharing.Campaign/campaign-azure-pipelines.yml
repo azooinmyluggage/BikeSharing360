@@ -62,12 +62,12 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'manifests'
-        targetPath: 'manifests'
+        targetPath: 'Bikesharing.Campaign/manifests'
     
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'charts'
-        targetPath: 'charts/bikesharingcampaign'
+        targetPath: 'Bikesharing.Campaign/charts/bikesharingcampaign'
 
 - stage: DeployToDefault
   displayName: Deploy to Default
