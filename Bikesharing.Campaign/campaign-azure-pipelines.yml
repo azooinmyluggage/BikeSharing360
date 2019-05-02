@@ -19,7 +19,7 @@ variables:
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
   imageRepository: 'bikesharingcampaign'
   containerRegistry: 'builddemo.azurecr.io'
-  dockerfilePath: '**/Bikesharing.Campaign/Dockerfile'
+  dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Kubernetes Namespace
@@ -62,12 +62,12 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'manifests'
-        targetPath: 'Bikesharing.Campaign/manifests'
+        targetPath: 'manifests'
     
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'charts'
-        targetPath: 'Bikesharing.Campaign/charts/bikesharingcampaign'
+        targetPath: 'charts/bikesharingcampaign'
 
 - stage: DeployToDefault
   displayName: Deploy to Default
