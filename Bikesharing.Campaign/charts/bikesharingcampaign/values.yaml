@@ -24,10 +24,10 @@ buildID: 1
 ingress:
   enabled: true
   annotations:
-    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/tls-acme: "true"
   path: /
-  # hosts:
-  #   - chart-example.local
+  hosts:
+    - cf322bf8119d45629da1.centralus.aksapp.io
   tls: []
     # - secretName: chart-example-tls
     #   hosts:
