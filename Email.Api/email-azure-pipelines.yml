@@ -40,8 +40,8 @@ stages:
       # vmImage: $(vmImageName)
     steps:
     
-    - powershell: 'docker-compose -f docker-compose.ci.build.yml up'
-      displayName: 'PowerShell Script'
+    - script: 'docker-compose -f docker-compose.ci.build.yml up'
+      displayName: 'Command Line Script'
     
     - task: Docker@2
       displayName: Build and push an image to container registry
