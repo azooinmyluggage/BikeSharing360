@@ -22,19 +22,6 @@ namespace Profile.Api.Controllers
             return Ok(profile);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
        Core.Models.Profile FindCreateProfile(string email, string city)
         {
             return new Core.Models.Profile
