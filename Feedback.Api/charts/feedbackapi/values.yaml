@@ -4,7 +4,7 @@
 fullnameOverride: bikesharingfeedbackapi
 replicaCount: 1
 image:
-  repository: bikesharingfeedbackapi
+  repository: builddemo.azurecr.io/bikesharingfeedbackapi
   tag: 2457
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -13,7 +13,7 @@ imagePullSecrets:
   # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
   #
   # This uses credentials from secret "myRegistryKeySecretName".
-  - name: builddemo.azurecr.io/builddemodfb0-auth
+  - name: builddemodfb0-auth
 service:
   type: ClusterIP
   port: 80
