@@ -19,7 +19,7 @@ variables:
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
   imageRepository: 'bikesharingemailapi'
   containerRegistry: 'builddemo.azurecr.io'
-  dockerfilePath: '**/Email.Api/Dockerfile'
+  dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Kubernetes Namespace
@@ -54,12 +54,12 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'manifests'
-        targetPath: 'Email.Api/manifests'
+        targetPath: 'manifests'
     
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'charts'
-        targetPath: 'Email.Api/charts/emailapi'
+        targetPath: 'charts/emailapi'
 
 - stage: Deploy
   displayName: Deploy stage
