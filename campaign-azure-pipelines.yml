@@ -102,33 +102,33 @@ stages:
               namespace: $(k8sNamespace)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
-          - task: KubernetesManifest@1
-            displayName: bake
-            name: bake
-            inputs:
-              action: bake
-              helmChart: '$(System.ArtifactsDirectory)/charts'
+          # - task: KubernetesManifest@1
+          #   displayName: bake
+          #   name: bake
+          #   inputs:
+          #     action: bake
+          #     helmChart: '$(System.ArtifactsDirectory)/charts'
 
-          - task: KubernetesManifest@1
-            displayName: deploy
-            inputs:
-              action: deploy
-              namespace: $(k8sNamespace)
-              manifests: $(bake.manifestsBundle)
-              imagePullSecrets: $(imagePullSecret)
-
-          # - task: KubernetesManifest@0
-          #   displayName: Deploy to Kubernetes cluster
+          # - task: KubernetesManifest@1
+          #   displayName: deploy
           #   inputs:
           #     action: deploy
           #     namespace: $(k8sNamespace)
-          #     manifests: |
-          #       $(System.ArtifactsDirectory)/manifests/deployment.yml
-          #       $(System.ArtifactsDirectory)/manifests/service.yml
-          #     imagePullSecrets: |
-          #       $(imagePullSecret)
-          #     containers: |
-          #       $(containerRegistry)/$(imageRepository):$(tag)
+          #     manifests: $(bake.manifestsBundle)
+          #     imagePullSecrets: $(imagePullSecret)
+
+          - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
+            inputs:
+              action: deploy
+              namespace: $(k8sNamespace)
+              manifests: |
+                $(System.ArtifactsDirectory)/manifests/deployment.yml
+                $(System.ArtifactsDirectory)/manifests/service.yml
+              imagePullSecrets: |
+                $(imagePullSecret)
+              containers: |
+                $(containerRegistry)/$(imageRepository):$(tag)
 
 - stage: DeployForPR
   displayName: Deploy to review app
