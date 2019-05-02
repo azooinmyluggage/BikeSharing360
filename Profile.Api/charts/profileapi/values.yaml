@@ -1,10 +1,10 @@
 # Default values for profileapi.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-fullnameOverride: profileapi
+fullnameOverride: bikesharingprofileapi
 replicaCount: 1
 image:
-  repository: profileapi
+  repository: bikesharingprofileapi
   tag: 2456
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -20,7 +20,7 @@ service:
 
 probes:
   enabled: false
-
+buildID: 1
 ingress:
   enabled: true
   annotations:

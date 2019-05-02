@@ -1,0 +1,15 @@
+FROM microsoft/aspnetcore-build:1.0
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 80
+
+WORKDIR /src
+COPY ["Bikesharing.Email.Api.csproj", "./"]
+RUN dotnet restore "Bikesharing.Email.Api.csproj"
+COPY . .
+RUN dotnet build -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION -- \"\$@\"" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

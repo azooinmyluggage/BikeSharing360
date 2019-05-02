@@ -1,11 +1,11 @@
-# Default values for bikesharingcampaign.
+# Default values for feedbackapi.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-fullnameOverride: bikesharingcampaign
+fullnameOverride: bikesharingfeedbackapi
 replicaCount: 1
 image:
-  repository: bikesharingcampaign
-  tag: 2459
+  repository: bikesharingfeedbackapi
+  tag: 2457
   pullPolicy: IfNotPresent
 imagePullSecrets:
   # Optionally specify an array of imagePullSecrets.
