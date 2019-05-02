@@ -36,12 +36,14 @@ stages:
   - job: Build
     displayName: Build job
     pool:
-      name: work-machine
-      # vmImage: $(vmImageName)
+      # name: work-machine
+      vmImage: $(vmImageName)
     steps:
     
-    - script: 'docker-compose -f docker-compose.ci.build.yml up'
-      displayName: 'Command Line Script'
+    # - script: 'docker-compose -f docker-compose.ci.build.yml up'
+    #   displayName: 'Command Line Script'
+    - bash: 'docker-compose -f docker-compose.ci.build.yml up'
+      displayName: 'Bash Script'
     
     - task: Docker@2
       displayName: Build and push an image to container registry
