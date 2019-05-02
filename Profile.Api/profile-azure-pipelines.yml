@@ -54,12 +54,12 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'manifests'
-        targetPath: 'manifests'
+        targetPath: 'Profile.Api/manifests'
 
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'charts'
-        targetPath: 'charts/profileapi'
+        targetPath: 'Profile.Api/charts/profileapi'
 
 - stage: Deploy
   displayName: Deploy stage
