@@ -4,7 +4,7 @@
 fullnameOverride: bikesharingcampaign
 replicaCount: 1
 image:
-  repository: bikesharingcampaign
+  repository: builddemo.azurecr.io/bikesharingcampaign
   tag: 2459
   pullPolicy: IfNotPresent
 imagePullSecrets:
@@ -20,7 +20,7 @@ service:
 
 probes:
   enabled: false
-buildID: "1"
+buildID: 1
 ingress:
   enabled: true
   annotations:
