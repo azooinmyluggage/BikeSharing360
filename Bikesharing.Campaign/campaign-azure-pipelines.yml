@@ -41,11 +41,6 @@ stages:
       vmImage: $(vmImageName)
     steps:
 
-    # - task: DockerInstaller@0
-    #   displayName: 'Install Docker 17.09.0-ce'
-    #   inputs:
-    #     dockerVersion: 17.09.0-ce
-
     - bash: 'docker-compose -f docker-compose.ci.build.yml up'
       displayName: 'Bash Script'
 
