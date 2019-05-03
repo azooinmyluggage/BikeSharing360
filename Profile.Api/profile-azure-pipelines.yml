@@ -101,8 +101,8 @@ stages:
               helmChart: '$(System.ArtifactsDirectory)/charts'
               overrides: |
                 image.tag:$(Build.BuildId)
-                ReleaseName:$(Build.BuildId)
-                ReleaseService:$(Build.BuildId)
+                # ReleaseName:$(Build.BuildId)
+                # ReleaseService:$(Build.BuildId)
 
 
           - task: KubernetesManifest@1
