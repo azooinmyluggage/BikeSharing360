@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ template "emailapi.name" . }}
     chart: {{ template "emailapi.chart" . }}
-    release: "{{ .Values.ReleaseName  }}"
+    release: "{{ .Values.ReleaseName }}"
     heritage: "{{ .Values.ReleaseService }}"
 spec:
   type: {{ .Values.service.type }}
@@ -16,4 +16,4 @@ spec:
       name: http
   selector:
     app: {{ template "emailapi.name" . }}
-    release: "{{ .Values.ReleaseName  }}"
+    release: "{{ .Values.ReleaseName }}"
