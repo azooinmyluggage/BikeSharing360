@@ -28,7 +28,7 @@ ingress:
     kubernetes.io/ingress.class: addon-http-application-routing
   path: /
   hosts:
-    - bikesharingemailapi.cf322bf8119d45629da1.centralus.aksapp.io
+    - bikesharingemailapi.1ea6353d261f44abb9ae.northeurope.aksapp.io
   tls: []
     # - secretName: chart-example-tls
     #   hosts:
