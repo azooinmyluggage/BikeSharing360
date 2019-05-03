@@ -70,7 +70,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'BikeSharing-Development.default'
+    environment: 'BikeSharing.default'
     strategy:
       runOnce:
         deploy:
