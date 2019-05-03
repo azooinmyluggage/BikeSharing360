@@ -19,7 +19,7 @@ variables:
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
   imageRepository: 'bikesharingcampaign'
   containerRegistry: 'builddemo.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: 'Bikesharing.Campaign/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Kubernetes Namespace
