@@ -8,7 +8,7 @@ trigger:
     - master
   paths:
     include:
-    - Feedback.Api/.Api/*
+    - Feedback.Api/*
 
 resources:
 - repo: self
