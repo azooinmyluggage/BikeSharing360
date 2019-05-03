@@ -28,7 +28,7 @@ namespace Profile.Api.Controllers
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Atul",
-                LastName = "Hanselman",
+                LastName = "Malaviya",
                 Email = email,
                 City = city
             };
