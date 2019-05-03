@@ -154,14 +154,14 @@ stages:
           - task: KubernetesManifest@0
             displayName: 'Create PR namespace'
             inputs:
-              kubernetesServiceConnection: 'BikeSharing-bikesharing-default-1556860061717'
+              kubernetesServiceConnection: 'BikeSharing-PR'
               action: deploy
               manifests: '$(System.ArtifactsDirectory)/manifests/pr-namespace.yml'
 
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
-              kubernetesServiceConnection: 'BikeSharing-bikesharing-default-1556860061717'
+              kubernetesServiceConnection: 'BikeSharing-PR'
               action: createSecret
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespaceforpr)
@@ -178,7 +178,7 @@ stages:
             displayName: deploy
             name: deploy
             inputs:
-              kubernetesServiceConnection: 'BikeSharing-bikesharing-default-1556860061717'
+              kubernetesServiceConnection: 'BikeSharing-PR'
               action: deploy
               namespace: $(k8sNamespaceforpr)
               manifests: $(bake.manifestsBundle)
@@ -187,7 +187,7 @@ stages:
           # - task: KubernetesManifest@0
           #   displayName: Deploy to Kubernetes cluster
           #   inputs:
-          #     kubernetesServiceConnection: 'a20e8b90-9165-48a8-823d-4ec762eb0553'
+          #     kubernetesServiceConnection: 'BikeSharing-PR'
           #     action: deploy
           #     namespace: $(k8sNamespaceforpr)
           #     manifests: |
