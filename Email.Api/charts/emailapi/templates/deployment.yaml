@@ -6,20 +6,20 @@ metadata:
     app: {{ template "emailapi.name" . }}
     chart: {{ template "emailapi.chart" . }}
     draft: {{ default "draft-app" .Values.draft }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    release: "{{ .Values.ReleaseName  }}"
+    heritage: "{{ .Values.ReleaseService }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "emailapi.name" . }}
-      release: {{ .Release.Name }}
+      release: "{{ .Values.ReleaseName  }}"
   template:
     metadata:
       labels:
         app: {{ template "emailapi.name" . }}
         draft: {{ default "draft-app" .Values.draft }}
-        release: {{ .Release.Name }}
+        release: "{{ .Values.ReleaseName  }}"
       annotations:
         buildID: "{{ .Values.buildID }}"
     spec:

@@ -9,8 +9,8 @@ metadata:
   labels:
     app: {{ template "profileapi.name" . }}
     chart: {{ template "profileapi.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    release: "{{ .Values.ReleaseName }}"
+    heritage: "{{ .Values.ReleaseService }}"
 {{- with .Values.ingress.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}

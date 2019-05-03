@@ -6,20 +6,20 @@ metadata:
     app: {{ template "feedbackapi.name" . }}
     chart: {{ template "feedbackapi.chart" . }}
     draft: {{ default "draft-app" .Values.draft }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    release: "{{ .Values.ReleaseName }}"
+    heritage: "{{ .Values.ReleaseService }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "feedbackapi.name" . }}
-      release: {{ .Release.Name }}
+      release: "{{ .Values.ReleaseName }}"
   template:
     metadata:
       labels:
         app: {{ template "feedbackapi.name" . }}
         draft: {{ default "draft-app" .Values.draft }}
-        release: {{ .Release.Name }}
+        release: "{{ .Values.ReleaseName }}"
       annotations:
         buildID: "{{ .Values.buildID }}"
     spec:

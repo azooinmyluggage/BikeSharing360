@@ -99,6 +99,10 @@ stages:
             inputs:
               action: bake
               helmChart: '$(System.ArtifactsDirectory)/charts'
+              overrides: |
+                image.tag:$(Build.BuildId)
+                ReleaseName:$(Build.BuildId)
+                ReleaseService:$(Build.BuildId)
 
           - task: KubernetesManifest@1
             displayName: deploy
