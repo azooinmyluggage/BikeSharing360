@@ -9,8 +9,8 @@ metadata:
   labels:
     app: {{ template "bikesharingcampaign.name" . }}
     chart: {{ template "bikesharingcampaign.chart" . }}
-    release: {{ .Values.ReleaseName }}
-    heritage: {{ .Values.ReleaseService }}
+    release: "{{ .Values.ReleaseName }}"
+    heritage: "{{ .Values.ReleaseService }}"
 {{- with .Values.ingress.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}

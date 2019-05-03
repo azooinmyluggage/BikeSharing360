@@ -6,20 +6,20 @@ metadata:
     app: {{ template "bikesharingcampaign.name" . }}
     chart: {{ template "bikesharingcampaign.chart" . }}
     draft: {{ default "draft-app" .Values.draft }}
-    release: {{ .Values.ReleaseName }}
-    heritage: {{ .Values.ReleaseService }}
+    release: "{{ .Values.ReleaseName }}"
+    heritage: "{{ .Values.ReleaseService }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "bikesharingcampaign.name" . }}
-      release: {{ .Values.ReleaseName }}
+      release: "{{ .Values.ReleaseName }}"
   template:
     metadata:
       labels:
         app: {{ template "bikesharingcampaign.name" . }}
         draft: {{ default "draft-app" .Values.draft }}
-        release: {{ .Values.ReleaseName }}
+        release: "{{ .Values.ReleaseName }}"
       annotations:
         buildID: "{{ .Values.buildID }}"
     spec:
