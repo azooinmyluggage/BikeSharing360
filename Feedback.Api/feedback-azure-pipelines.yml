@@ -19,7 +19,7 @@ variables:
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
   imageRepository: 'bikesharingfeedbackapi'
   containerRegistry: 'builddemo.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: 'Feedback.Api/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Kubernetes Namespace
@@ -101,8 +101,8 @@ stages:
               helmChart: '$(System.ArtifactsDirectory)/charts'
               overrides: |
                 image.tag:$(Build.BuildId)
-                ReleaseName:$(Build.BuildId)
-                ReleaseService:$(Build.BuildId)
+                # ReleaseName:$(Build.BuildId)
+                # ReleaseService:$(Build.BuildId)
 
           - task: KubernetesManifest@1
             displayName: deploy
