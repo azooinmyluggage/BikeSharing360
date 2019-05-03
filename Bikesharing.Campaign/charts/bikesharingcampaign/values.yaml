@@ -3,6 +3,8 @@
 # Declare variables to be passed into your templates.
 fullnameOverride: bikesharingcampaign
 replicaCount: 1
+ReleaseName: bikesharingcampaign
+ReleaseService: bikesharingcampaignService
 image:
   repository: builddemo.azurecr.io/bikesharingcampaign
   tag: 2459

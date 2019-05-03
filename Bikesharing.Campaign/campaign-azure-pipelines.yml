@@ -103,6 +103,10 @@ stages:
             inputs:
               action: bake
               helmChart: '$(System.ArtifactsDirectory)/charts'
+              overrides: |
+                'image.tag:$(Build.BuildId)'
+                'ReleaseName:$(Build.BuildId)'
+                'ReleaseService:$(Build.BuildId)'
 
           - task: KubernetesManifest@1
             displayName: deploy
@@ -112,6 +116,7 @@ stages:
               namespace: $(k8sNamespace)
               manifests: $(bake.manifestsBundle)
               imagePullSecrets: $(imagePullSecret)
+        
                           
           # - task: KubernetesManifest@0
           #   displayName: Deploy to Kubernetes cluster

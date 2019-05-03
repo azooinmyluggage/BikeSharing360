@@ -5,8 +5,8 @@ metadata:
   labels:
     app: {{ template "bikesharingcampaign.name" . }}
     chart: {{ template "bikesharingcampaign.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    release: {{ .Values.ReleaseName }}
+    heritage: {{ .Values.ReleaseService }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -16,4 +16,4 @@ spec:
       name: http
   selector:
     app: {{ template "bikesharingcampaign.name" . }}
-    release: {{ .Release.Name }}
+    release: {{ .Values.ReleaseName }}
