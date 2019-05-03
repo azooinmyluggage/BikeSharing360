@@ -74,7 +74,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'BikeSharing-Production.default-builddemo'
+    environment: 'BikeSharing-Development.default'
     strategy:
       runOnce:
         deploy:
@@ -136,7 +136,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'BikeSharing-Development'
+    environment: 'BikeSharing-PR'
     strategy:
       runOnce:
         deploy:
@@ -154,14 +154,14 @@ stages:
           - task: KubernetesManifest@0
             displayName: 'Create PR namespace'
             inputs:
-              kubernetesServiceConnection: 'BuildDemoForPR'
+              kubernetesServiceConnection: 'a20e8b90-9165-48a8-823d-4ec762eb0553'
               action: deploy
               manifests: '$(System.ArtifactsDirectory)/manifests/pr-namespace.yml'
 
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
-              kubernetesServiceConnection: 'BuildDemoForPR'
+              kubernetesServiceConnection: 'a20e8b90-9165-48a8-823d-4ec762eb0553'
               action: createSecret
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespaceforpr)
@@ -186,7 +186,7 @@ stages:
           # - task: KubernetesManifest@0
           #   displayName: Deploy to Kubernetes cluster
           #   inputs:
-          #     kubernetesServiceConnection: 'BuildDemoForPR'
+          #     kubernetesServiceConnection: 'a20e8b90-9165-48a8-823d-4ec762eb0553'
           #     action: deploy
           #     namespace: $(k8sNamespaceforpr)
           #     manifests: |
