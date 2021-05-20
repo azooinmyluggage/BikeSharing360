@@ -22,26 +22,13 @@ namespace Profile.Api.Controllers
             return Ok(profile);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
        Core.Models.Profile FindCreateProfile(string email, string city)
         {
             return new Core.Models.Profile
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Atul",
-                LastName = "Hanselman",
+                LastName = "Malaviya",
                 Email = email,
                 City = city
             };

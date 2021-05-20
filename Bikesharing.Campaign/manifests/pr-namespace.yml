@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: Namespace
-apiVersion: v1
 metadata:
   name: demopr
   labels:
     name: demopr
-    azds.io/space: true 
+    azds.io/space: 'true'
     azds.io/parent-space: default

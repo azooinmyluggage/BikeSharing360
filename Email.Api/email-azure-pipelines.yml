@@ -8,7 +8,7 @@ trigger:
     - master
   paths:
     include:
-    - Profile.Api/*
+    - Email.Api/*
 
 resources:
 - repo: self
@@ -17,9 +17,9 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'df9d8a54-286b-47af-8f89-e423226944da'
-  imageRepository: 'bikesharingprofileapi'
+  imageRepository: 'bikesharingemailapi'
   containerRegistry: 'builddemo.azurecr.io'
-  dockerfilePath: '**/Profile.Api/Dockerfile'
+  dockerfilePath: 'Email.Api/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Kubernetes Namespace
@@ -36,11 +36,15 @@ stages:
   - job: Build
     displayName: Build job
     pool:
+      # name: work-machine
       vmImage: $(vmImageName)
     steps:
+    
+    # - script: 'docker-compose -f docker-compose.ci.build.yml up'
+    #   displayName: 'Command Line Script'
     - bash: 'docker-compose -f docker-compose.ci.build.yml up'
       displayName: 'Bash Script'
-      
+    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
@@ -54,7 +58,12 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'manifests'
-        targetPath: 'Profile.Api/manifests'
+        targetPath: 'Email.Api/manifests'
+    
+    - task: PublishPipelineArtifact@0
+      inputs:
+        artifactName: 'charts'
+        targetPath: 'Email.Api/charts/emailapi'
 
 - stage: Deploy
   displayName: Deploy stage
@@ -65,7 +74,7 @@ stages:
     pool:
       name: work-machine
       # vmImage: $(vmImageName)
-    environment: 'BikeSharing-Production.default-builddemo'
+    environment: 'BikeSharing.default'
     strategy:
       runOnce:
         deploy:
@@ -74,6 +83,11 @@ stages:
             inputs:
               artifactName: 'manifests'
               downloadPath: '$(System.ArtifactsDirectory)/manifests'
+          
+          - task: DownloadPipelineArtifact@1
+            inputs:
+              artifactName: 'charts'
+              downloadPath: '$(System.ArtifactsDirectory)/charts'
 
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
@@ -82,16 +96,36 @@ stages:
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespace)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-              
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
+          
+          - task: KubernetesManifest@1
+            displayName: bake
+            name: bake
+            inputs:
+              action: bake
+              helmChart: '$(System.ArtifactsDirectory)/charts'
+              overrides: |
+                image.tag:$(Build.BuildId)
+                # ReleaseName:$(Build.BuildId)
+                # ReleaseService:$(Build.BuildId)
+
+          - task: KubernetesManifest@1
+            displayName: deploy
+            name: deploy
             inputs:
               action: deploy
               namespace: $(k8sNamespace)
-              manifests: |
-                $(System.ArtifactsDirectory)/manifests/deployment.yml
-                $(System.ArtifactsDirectory)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+              manifests: $(bake.manifestsBundle)
+              imagePullSecrets: $(imagePullSecret)         
+                   
+          # - task: KubernetesManifest@0
+          #   displayName: Deploy to Kubernetes cluster
+          #   inputs:
+          #     action: deploy
+          #     namespace: $(k8sNamespace)
+          #     manifests: |
+          #       $(System.ArtifactsDirectory)/manifests/deployment.yml
+          #       $(System.ArtifactsDirectory)/manifests/service.yml
+          #     imagePullSecrets: |
+          #       $(imagePullSecret)
+          #     containers: |
+          #       $(containerRegistry)/$(imageRepository):$(tag)
